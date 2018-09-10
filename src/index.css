@@ -3,3 +3,27 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+
+.item{
+  width: 800px;
+  padding: 10px;
+  margin: 20px;
+  border: solid silver 2px;
+}
+
+.item-info{
+  float: left;
+}
+
+.item-name, .item-price{
+  display: inline-block;
+  width: 200px;
+  padding-left: 20px;
+  text-align: center;
+}
+
+.addToShoppingCart{
+  width: auto;
+  height: auto;
+}
