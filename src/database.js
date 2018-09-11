@@ -52,7 +52,12 @@ function loadPromotions() {
     ];
 }
 
+const getItemByBarcode = (barcode) => {
+    return loadAllItems().filter(item => item.barcode === barcode)[0];
+}
+
 module.exports = {
     loadAllItems: loadAllItems,
-    loadPromotions: loadPromotions
+    loadPromotions: loadPromotions,
+    getItemByBarcode: getItemByBarcode
 };

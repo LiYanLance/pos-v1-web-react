@@ -1,30 +1,46 @@
-import React,{Component} from 'react';
+import React, {Component} from 'react';
 import Item from "./Item"
+import {getItemByBarcode} from "./database"
 
-class ItemList extends Component{
+class ItemList extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {ref:[]}
     }
 
-    render(){
-        const items = this.props.items;
-        return(
-            <div>
-                {items.map(item =>
-                    <Item ref={(ref) => this.state.ref[item.barcode] = ref} key={item.barcode} item={item}/>)}
-                <button className="addToShoppingCart" onClick={this.getSubmitCount.bind(this)}>submit</button>
+    render() {
+        return (
+            <div className="itemContainer">
+                <h2>ITEMLIST</h2>
+                {this.props.items.map(item =>
+                    <Item
+                        onCountChange={this.props.onCountChange.bind(this)}
+                        key={item.barcode}
+                        item={item}
+                    />)}
+                <div className="promotion">
+                    <h3>PROMOTIONS</h3>
+                </div>
+                {this.props.promotions[0].barcodes.map(barcode => {
+                        return (
+                            <table key={"p" + barcode}>
+                                <tbody>
+                                <tr>
+                                    <td>{getItemByBarcode(barcode).name}</td>
+                                    <td>{this.props.promotions[0].type}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        )
+                    }
+                )}
+                <button
+                    className="addToShoppingCart"
+                    onClick={this.props.changePage}>
+                    GO TO SHOPPING CART
+                </button>
             </div>
         )
-    }
-
-    getSubmitCount(){
-        const itemCounts = this.props.items.map(item => {
-            item.count = this.state.ref[item.barcode].getCount();
-            return item;
-        });
-
     }
 }
 

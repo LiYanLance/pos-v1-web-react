@@ -5,7 +5,11 @@ class Item extends Component{
 
     constructor(props) {
         super(props);
-        this.state = {ref :{}};
+    }
+
+    onCountChange(result){
+        this.props.item.quantity = result;
+        this.props.onCountChange(this.props.item);
     }
 
     render(){
@@ -15,14 +19,13 @@ class Item extends Component{
                     <span className="item-name">{this.props.item.name}</span>
                     <span className="item-price">{this.props.item.price}元/{this.props.item.unit}</span>
                 </div>
-                <Counter ref={(ref) => this.state.ref = ref}/>
+                <Counter
+                    onCountChange={this.onCountChange.bind(this)}
+                />
             </div>
         )
     }
 
-    getCount(){
-        return this.state.ref.state.count;
-    }
 }
 
 export default Item;
